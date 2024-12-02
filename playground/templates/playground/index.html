@@ -1,0 +1,13 @@
+<h1>Django Course</h1>
+
+<div>
+    
+        {% comment %} {% for product in products %}
+            <li>{{product.title}} - {{product.collection.title}}</li>
+        {% endfor %} {% endcomment %}
+
+         {% for order in orders %}
+            <li>{{order.id}} - {{order.customer.first_name}}</li>
+        {% endfor %}
+    
+</div>

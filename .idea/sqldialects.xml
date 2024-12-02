@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/72aa4985-c5c0-4272-8534-1f578e38637f/console.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Downloads/Telegram Desktop/1. Getting Started (3m)/4- Supplementary Materials/Django- Resources/Resources/Data/seed.sql" dialect="MySQL" />
+    <file url="file://$USER_HOME$/Downloads/shop_customer.sql" dialect="MySQL" />
+  </component>
+</project>
