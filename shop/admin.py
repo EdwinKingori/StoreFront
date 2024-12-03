@@ -1,9 +1,11 @@
 from typing import Any
 from django.contrib import admin, messages
+from django.contrib.contenttypes.admin import GenericTabularInline
 from django.db.models import Count
 from django.urls import reverse
 from django.utils.html import format_html, urlencode
 from .models import Product, Customer, Collection, Order, OrderItem, Address, Cart
+from tags.models import Tag, TaggedItem
 # Register your models here.
 
 
@@ -22,7 +24,13 @@ class InventoryFilter(admin.SimpleListFilter):
             return queryset.filter(inventory__lt=10)
 
 
+# class TagInline(GenericTabularInline):
+#     autocomplete_fields = ['tag']
+#     model = TaggedItem
+
+
 class ProductAdmin(admin.ModelAdmin):
+    # inlines = [TagInline]
     autocomplete_fields = ['collection']
     prepopulated_fields = {
         'slug': ['title']

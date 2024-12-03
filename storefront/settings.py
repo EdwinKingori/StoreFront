@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'tags.apps.TagsConfig',
     'likes.apps.LikesConfig',
+    'shop_custom',
 
     'debug_toolbar',
 ]
