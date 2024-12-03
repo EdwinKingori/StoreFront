@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.db.models import Q, Func, F, Value
 from django.db.models.functions import Concat
+from django.contrib.contenttypes.models import ContentType
 from shop.models import Product, OrderItem, Order, Customer
+from tags.models import TaggedItem
 # Create your views here.
 
 
