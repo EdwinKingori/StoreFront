@@ -15,10 +15,7 @@ def product_list(request):
 
 @api_view()
 def product_detail(request, id):
-    try:
-        product = Product.objects.get(pk=id)
-        # converts the product object to a dictionary
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
-    except Product.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    product = get_object_or_404(Product, pk=id)
+    # converts the product object to a dictionary
+    serializer = ProductSerializer(product)
+    return Response(serializer.data)
