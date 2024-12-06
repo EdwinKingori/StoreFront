@@ -59,7 +59,7 @@ def collection_list(request):
 
 @api_view(['Get', 'PUT', 'DELETE'])
 def collection_detail(request, pk):
-    collection = get_object_or_404(Collection, id=pk)
+    collection = get_object_or_404(Collection, pk=pk)
     if request.method == 'GET':
         serializer = CollectionSerializer(collection)
         return Response(serializer.data)
@@ -69,6 +69,7 @@ def collection_detail(request, pk):
         serializer.save()
         return Response(serializer.data)
     elif request.method == 'DELETE':
-        collection = Collection.objects.get(id=pk)
+        if collection.products.count() > 0:
+            return Response({'error': 'Collection cannot be deleted beacuse it includes one or more products!'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
         collection.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
