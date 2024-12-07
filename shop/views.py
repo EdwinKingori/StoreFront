@@ -1,3 +1,4 @@
+from django.db.models.aggregates import Count
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from rest_framework.generics import ListCreateAPIView
@@ -88,17 +89,24 @@ class ProductDetail(APIView):
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-@api_view(['GET', 'POST'])
-def collection_list(request):
-    if request.method == 'GET':
-        collections = Collection.objects.all()
-        serializer = CollectionSerializer(collections, many=True)
-        return Response(serializer.data)
-    elif request.method == 'POST':
-        serializer = CollectionSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
+class CollectionList(ListCreateAPIView):
+    queryset = Collection.objects.annotate(
+        products_count=Count('products')).all()
+    serializer_class = CollectionSerializer
+
+    
+
+# @api_view(['GET', 'POST'])
+# def collection_list(request):
+#     if request.method == 'GET':
+#         collections = Collection.objects.all()
+#         serializer = CollectionSerializer(collections, many=True)
+#         return Response(serializer.data)
+#     elif request.method == 'POST':
+#         serializer = CollectionSerializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         serializer.save()
+#         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
 @api_view(['Get', 'PUT', 'DELETE'])
