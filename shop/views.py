@@ -23,7 +23,7 @@ class ProductViewSet(ModelViewSet):
         if OrderItem.objects.filter(product_id=kwargs['pk']).count() > 0:
             return Response({"error": "Selected product cannot be deleted beacuse it is associated with an order item. "}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
         return super().destroy(request, *args, **kwargs)
-    
+
 
 class CollectionViewSet(ModelViewSet):
     queryset = Collection.objects.annotate(
@@ -61,8 +61,6 @@ class CollectionViewSet(ModelViewSet):
 #         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
-
-
 # class CollectionDetail(RetrieveUpdateDestroyAPIView):
 #     queryset = Collection.objects.annotate(
 #         products_count=Count('products')).all()
@@ -95,3 +93,6 @@ class CollectionViewSet(ModelViewSet):
 class ReviewViewSet(ModelViewSet):
     queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    def get_serializer_context(self):
+        return {'product_id': self.kwargs['product_pk']}
