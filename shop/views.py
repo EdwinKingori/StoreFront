@@ -93,5 +93,5 @@ class CollectionViewSet(ModelViewSet):
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class ReviewViewSet(ModelViewSet):
-    reviews = Review.objects.all()
-    serializers = ReviewSerializer
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
