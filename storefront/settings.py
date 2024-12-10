@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_filters',
     'rest_framework',
 
     'playground.apps.PlaygroundConfig',
@@ -35,6 +36,8 @@ INSTALLED_APPS = [
     'shop_custom',
 
     'debug_toolbar',
+
+    
 ]
 
 MIDDLEWARE = [
