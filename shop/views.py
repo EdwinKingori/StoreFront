@@ -17,7 +17,7 @@ class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     filter_backends = [DjangoFilterBackend]
-    filter_fields = ['collection_id']
+    filterset_fields = ['collection_id']
 
 #replacing the queryset for filtering parameters with django_filters
     # def get_queryset(self):
