@@ -33,13 +33,13 @@ INSTALLED_APPS = [
     'shop.apps.ShopConfig',
     'tags.apps.TagsConfig',
     'likes.apps.LikesConfig',
-    'shop_custom',
+    'core',
 
     'debug_toolbar',
 
     'django_extensions',
 
-    
+
 ]
 
 MIDDLEWARE = [
@@ -138,3 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False
 }
+
+AUTH_USER_MODEL = 'core.User'
