@@ -28,15 +28,17 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
+    'djoser',
 
+    # apps
     'playground.apps.PlaygroundConfig',
     'shop.apps.ShopConfig',
     'tags.apps.TagsConfig',
     'likes.apps.LikesConfig',
     'core',
 
+    # tools
     'debug_toolbar',
-
     'django_extensions',
 
 
@@ -136,7 +138,14 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    "COERCE_DECIMAL_TO_STRING": False
+    "COERCE_DECIMAL_TO_STRING": False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+}
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
 }
 
 AUTH_USER_MODEL = 'core.User'
