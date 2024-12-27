@@ -13,7 +13,7 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from rest_framework.exceptions import NotAuthenticated
 from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, FullDjangoModelPermissions
 from .pagination import DefaultPagination
 from .serializers import (
     CustomerSerializer,
@@ -159,7 +159,7 @@ class CartItemViewSet(ModelViewSet):
 class CustomerViewSet(ModelViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
-    permission_classes = [IsAdminUser]
+    permission_classes = [FullDjangoModelPermissions]
 
     def get_permisions(self):
         if self.request.method == 'GET':
