@@ -10,6 +10,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotAuthenticated
 from .models import Product, Collection, OrderItem, Review, Cart, CartItem, Customer
 from .pagination import DefaultPagination
 from .serializers import (
@@ -154,10 +156,16 @@ class CartItemViewSet(ModelViewSet):
 class CustomerViewSet(CreateModelMixin, RetrieveModelMixin, UpdateModelMixin, GenericViewSet):
     queryset = Customer.objects.all()
     serializer_class = CustomerSerializer
+    permission_classes = [IsAuthenticated]
 
     @action(detail=False, methods=['GET', 'PUT'])
     def me(self, request):
-        (customer, created) = Customer.objects.get_or_create(
+
+        if not request.user.is_authenticated:
+            raise NotAuthenticated(
+                "You must be logged in to access this endpoint.")
+        print(f"Authenticated user: {request.user}")
+        customer, created = Customer.objects.get_or_create(
             user_id=request.user.id)
         # customer = get_object_or_404(Customer, user_id=request.user.id)
         if request.method == 'GET':
